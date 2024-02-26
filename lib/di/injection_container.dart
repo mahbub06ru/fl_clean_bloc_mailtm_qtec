@@ -14,7 +14,7 @@ void setupDependencyInjection() {
   getIt.registerSingleton(http.Client());
 
   // Registering data sources
-  getIt.registerSingleton<DomainDataSource>(
+  getIt.registerSingleton<DomainRemoteDataSource>(
     DomainDataSourceImpl(client: getIt()),
   );
 

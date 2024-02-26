@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/router/app_router.dart';
 import '../../../../config/common/app.dart';
 import '../../../../config/common/app_dimensions.dart';
-import '../bloc/remote/login/user_bloc.dart';
+import '../bloc/remote/login/login_bloc.dart';
 
 
 class SplashPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   void _nextScreen() async {
     // Navigator.of(context).pushReplacementNamed(MainAppRouter.login);
     await Future.delayed(const Duration(seconds: 1));
-    final userState = context.read<UserBloc>().state;
+    final userState = context.read<LoginBloc>().state;
     print('userState');
     print(userState);
 

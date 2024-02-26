@@ -7,7 +7,7 @@ import '../data_sources/remote/domain_data_source.dart';
 
 
 class DomainRepositoryImpl implements DomainRepository {
-  final DomainDataSource dataSource;
+  final DomainRemoteDataSource dataSource;
 
   DomainRepositoryImpl({required this.dataSource});
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_mail_tm_qtec/core/router/app_router.dart';
 
-import '../../features/mail_tm/presentation/bloc/remote/login/user_bloc.dart';
+import '../../features/mail_tm/presentation/bloc/remote/login/login_bloc.dart';
 import '../constants/colors.dart';
 import '../../di/di.dart' as di;
 import '../constants/strings.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => di.sl<UserBloc>()..add(CheckUser()),
+          create: (context) => di.sl<LoginBloc>()..add(CheckUser()),
         ),
       ],
       child: MaterialApp(

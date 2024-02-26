@@ -5,11 +5,12 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 
-abstract class DomainDataSource {
+abstract class DomainRemoteDataSource {
   Future<List<DomainModel>> getDomains();
+
 }
 
-class DomainDataSourceImpl implements DomainDataSource {
+class DomainDataSourceImpl implements DomainRemoteDataSource {
   final http.Client client;
 
   DomainDataSourceImpl({required this.client});

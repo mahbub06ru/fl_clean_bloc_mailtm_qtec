@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/remote/login/user_bloc.dart';
+import '../bloc/remote/login/login_bloc.dart';
 import '../widgets/login/unlogged_profile_container.dart';
 import '../widgets/login/user_logged_profile_container.dart';
 
@@ -23,11 +23,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          BlocBuilder<UserBloc, UserState>(
+          BlocBuilder<LoginBloc, UserState>(
             builder: (context, state) {
               if (state is UserLogged) {
                 return userLoggedProfileContainer(context,
-                    "${state.user.firstName}!", state.user.email!);
+                    "${state.user.token}!", state.user.id);
               } else {
                 return unloggedProfileContainer(context);
               }

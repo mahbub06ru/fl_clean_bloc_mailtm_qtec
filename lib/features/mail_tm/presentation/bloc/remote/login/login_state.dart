@@ -1,4 +1,4 @@
-part of 'user_bloc.dart';
+part of 'login_bloc.dart';
 
 @immutable
 abstract class UserState extends Equatable {}
@@ -14,7 +14,7 @@ class UserLoading extends UserState {
 }
 
 class UserLogged extends UserState {
-  final DomainEntityUser user;
+  final LoginEntity user;
   UserLogged(this.user);
   @override
   List<Object> get props => [user];

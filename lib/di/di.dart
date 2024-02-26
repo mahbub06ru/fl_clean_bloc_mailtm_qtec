@@ -1,6 +1,6 @@
-import 'package:flutter_clean_mail_tm_qtec/di/user.dart';
-import 'package:get_it/get_it.dart';
 
+import 'package:flutter_clean_mail_tm_qtec/di/login.dart';
+import 'package:get_it/get_it.dart';
 
 import 'common.dart';
 final sl = GetIt.instance;
@@ -10,7 +10,8 @@ Future<void> init() async {
   // Register features
   // registerCategoryFeature();
   // registerProductFeature();
-  registerUserFeature();
+
+  registerLoginFeature();
   // registerDeliveryInfoFeature();
   // registerCartFeature();
   // registerOrderFeature();
@@ -21,3 +22,5 @@ Future<void> init() async {
   // Register common dependencies
   registerCommonDependencies();
 }
+
+

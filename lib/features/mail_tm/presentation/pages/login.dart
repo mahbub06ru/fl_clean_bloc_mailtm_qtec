@@ -6,8 +6,8 @@ import '../../../../config/common/app_typography.dart';
 import '../../../../config/common/space.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/errors/failures.dart';
-import '../../domain/usecases/sign_in_usecase.dart';
-import '../bloc/remote/login/user_bloc.dart';
+import '../../domain/usecases/login_use_case.dart';
+import '../bloc/remote/login/login_bloc.dart';
 import '../widgets/login/auth_error_dialog.dart';
 import '../widgets/login/credential_failure_dialog.dart';
 import '../widgets/login/custom_textfield.dart';
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 Space.yf(1.7),
-                BlocConsumer<UserBloc, UserState>(
+                BlocConsumer<LoginBloc, UserState>(
                   listener: (context, state) {
                     if (state is UserLogged) {
                       showSuccessfulAuthDialog(context, "logged in");
@@ -98,10 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     return ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          context.read<UserBloc>().add(
+                          context.read<LoginBloc>().add(
                                 SignInUser(
                                   SignInParams(
-                                    username: _emailController.text,
+                                    address: _emailController.text,
                                     password: _passwordController.text,
                                   ),
                                 ),

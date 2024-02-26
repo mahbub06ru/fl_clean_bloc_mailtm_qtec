@@ -1,19 +1,19 @@
 
+import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/data/models/login.dart';
+import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/domain/entities/login.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/errors/exceptions.dart';
-import '../../../domain/entities/dummy_user.dart';
-import '../../models/dummyjson_user_response_model.dart';
 
-abstract class UserLocalDataSource {
+abstract class LoginLocalDataSource {
   Future<String> getToken();
 
-  Future<DummyJsonUserModel> getUser();
+  Future<LoginModel> getUser();
 
   Future<void> saveToken(String token);
 
-  Future<void> saveUser(DomainEntityUser  user);
+  Future<void> saveUser(LoginEntity  user);
 
   Future<void> clearCache();
 
@@ -23,10 +23,10 @@ abstract class UserLocalDataSource {
 const cachedToken = 'TOKEN';
 const cachedUser = 'USER';
 
-class UserLocalDataSourceImpl implements UserLocalDataSource {
+class LoginLocalDataSourceImpl implements LoginLocalDataSource {
   final FlutterSecureStorage secureStorage;
   final SharedPreferences sharedPreferences;
-  UserLocalDataSourceImpl(
+  LoginLocalDataSourceImpl(
       {required this.sharedPreferences, required this.secureStorage});
 
   @override
@@ -45,36 +45,30 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  Future<DummyJsonUserModel> getUser() async {
+  Future<LoginModel> getUser() async {
     if (sharedPreferences.getBool('first_run') ?? true) {
       await secureStorage.deleteAll();
       sharedPreferences.setBool('first_run', false);
     }
     final jsonString = sharedPreferences.getString(cachedUser);
     if (jsonString != null) {
-      return Future.value(dummyJsonUserModelFromJson(jsonString));
+      return Future.value(loginModelFromJson(jsonString));
     } else {
       throw CacheException();
     }
   }
 
   @override
-  Future<void> saveUser(DomainEntityUser user) {
+  Future<void> saveUser(LoginEntity user) {
     // Convert DomainEntityUser to DummyJsonUserModel
-    final dummyUser = DummyJsonUserModel(
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      gender: user.gender,
-      image: user.image,
+    final dummyUser = LoginModel(
       token: user.token,
+      id: user.id,
     );
 
     return sharedPreferences.setString(
       cachedUser,
-      dummyJsonUserModelToJson(dummyUser),
+      loginModelToJson(dummyUser),
     );
   }
 
@@ -88,7 +82,6 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   @override
   Future<void> clearCache() async {
     await secureStorage.deleteAll();
-  //  await sharedPreferences.remove(cachedCart);
     await sharedPreferences.remove(cachedUser);
   }
 }

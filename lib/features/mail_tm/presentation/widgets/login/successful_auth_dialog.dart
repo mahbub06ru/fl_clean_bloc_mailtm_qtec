@@ -6,7 +6,7 @@ import '../../../../../config/common/app_dimensions.dart';
 import '../../../../../config/common/app_typography.dart';
 import '../../../../../config/common/space.dart';
 import '../../../../../config/routes/routes.dart';
-import '../../bloc/remote/login/user_bloc.dart';
+import '../../bloc/remote/login/login_bloc.dart';
 
 
 Future<void> showSuccessfulAuthDialog(BuildContext context, String text) async {
@@ -34,7 +34,7 @@ Future<void> showSuccessfulAuthDialog(BuildContext context, String text) async {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    BlocBuilder<UserBloc, UserState>(
+                    BlocBuilder<LoginBloc, UserState>(
                         builder: (context, state) {
                           if (state is UserLogged) {
                             return  GestureDetector(
