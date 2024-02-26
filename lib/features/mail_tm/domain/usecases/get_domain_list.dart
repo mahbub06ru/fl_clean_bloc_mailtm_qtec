@@ -5,10 +5,9 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/domain.dart';
 import '../repositories/domain_repository.dart';
 
-class GetDomainUseCase extends UseCase<List<DomainEntity>, NoParams> {
+class GetRemoteDomainUseCase extends UseCase<List<DomainEntity>, NoParams> {
   final DomainRepository repository;
-
-  GetDomainUseCase({required this.repository});
+  GetRemoteDomainUseCase({required this.repository});
 
   @override
   Future<Either<Failure, List<DomainEntity>>> call(NoParams params) async {

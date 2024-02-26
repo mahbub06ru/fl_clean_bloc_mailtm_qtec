@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/pages/account.dart';
 import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/pages/splash.dart';
 
+import '../../features/mail_tm/presentation/pages/domains.dart';
 import '../../features/mail_tm/presentation/pages/home_page.dart';
 import '../../features/mail_tm/presentation/pages/login.dart';
 import '../errors/exceptions.dart';
@@ -9,6 +10,7 @@ import '../errors/exceptions.dart';
 sealed class MainAppRouter {
   static const String splash = '/';
   static const String account = '/account';
+  static const String domain = '/domain';
   static const String ads = '/ads';
   static const String root = '/root';
   static const String productDetails = '/product-details';
@@ -53,6 +55,9 @@ sealed class MainAppRouter {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case account:
         return MaterialPageRoute(builder: (_) => const AccountScreen());
+      case domain:
+        return MaterialPageRoute(builder: (_) => const DomainListPage());
+
      /* case contact:
         return MaterialPageRoute(builder: (_) => ContactScreen());
       case cart:

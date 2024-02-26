@@ -1,32 +1,39 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../../../core/errors/failures.dart';
 import '../../../../domain/entities/domain.dart';
 
 abstract class DomainState extends Equatable {
-  const DomainState();
+  final List<DomainEntity> domains;
+  const DomainState({required this.domains});
 
   @override
   List<Object> get props => [];
 }
 
-class DomainInitial extends DomainState {}
+class DomainInitial extends DomainState {
+  const DomainInitial({required super.domains});
+  @override
+  List<Object> get props => [];
+}
 
-class DomainLoading extends DomainState {}
+class DomainLoading extends DomainState {
+  const DomainLoading({required super.domains});
+  @override
+  List<Object> get props => [];
+}
 
 class DomainLoaded extends DomainState {
-  final List<DomainEntity> domains;
-
-  const DomainLoaded({required this.domains});
-
+  const DomainLoaded({required super.domains});
   @override
-  List<Object> get props => [domains];
+  List<Object> get props => [];
 }
 
 class DomainError extends DomainState {
-  final String message;
-
-  const DomainError({required this.message});
-
+  final Failure failure;
+  const DomainError({required super.domains, required this.failure});
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [];
 }
+
+

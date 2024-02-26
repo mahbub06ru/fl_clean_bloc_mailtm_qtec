@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_mail_tm_qtec/core/router/app_router.dart';
 import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/bloc/remote/account/account_bloc.dart';
+import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/bloc/remote/domain/domain_bloc.dart';
+import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/bloc/remote/domain/domain_event.dart';
 
 import '../../features/mail_tm/presentation/bloc/remote/login/login_bloc.dart';
 import '../constants/colors.dart';
@@ -20,6 +22,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => di.sl<AccountBloc>()..add(CheckAccount()),
+        ),
+        BlocProvider(
+          create: (context) =>
+          di.sl<DomainBloc>()..add(GetDomains()),
         ),
       ],
       child: MaterialApp(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../features/mail_tm/presentation/pages/domain_list_screen.dart';
+import '../../features/mail_tm/presentation/pages/domains.dart';
 
 class AppRouter {
   static const String domainList = '/domain_list';

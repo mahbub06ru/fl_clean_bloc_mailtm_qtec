@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_mail_tm_qtec/core/router/app_router.dart';
 import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/domain/usecases/account_use_case.dart';
 import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/bloc/remote/account/account_bloc.dart';
 
@@ -137,7 +138,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 transparentButton(
                   context: context,
                   onTap: () {
-                    // Navigator.of(context).pushNamed(AppRouter.signup);
+                    Navigator.of(context).pushNamed(MainAppRouter.domain);
                   },
                   buttonText: "Signup",
                 )

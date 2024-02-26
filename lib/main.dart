@@ -6,7 +6,6 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'config/routes/routes.dart';
 import 'core/app/app.dart';
 import 'core/observer/bloc_observer.dart';
-import 'di/injection_container.dart';
 import 'di/di.dart' as di;
 /*void main() {
   WidgetsFlutterBinding.ensureInitialized();
