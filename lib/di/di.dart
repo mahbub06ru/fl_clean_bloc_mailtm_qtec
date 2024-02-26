@@ -1,4 +1,5 @@
 
+import 'package:flutter_clean_mail_tm_qtec/di/account.dart';
 import 'package:flutter_clean_mail_tm_qtec/di/login.dart';
 import 'package:get_it/get_it.dart';
 
@@ -12,6 +13,7 @@ Future<void> init() async {
   // registerProductFeature();
 
   registerLoginFeature();
+  registerAccountFeature();
   // registerDeliveryInfoFeature();
   // registerCartFeature();
   // registerOrderFeature();
