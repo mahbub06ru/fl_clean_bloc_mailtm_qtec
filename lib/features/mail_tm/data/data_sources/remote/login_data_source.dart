@@ -40,26 +40,4 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
     }
   }
 
-
- /* @override
-  Future<LoginEntity> login(String address, String password) async {
-    final response = await client.post(
-      Uri.parse('https://api.mail.tm/token'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'address': address,
-        'password': password,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(response.body);
-      return LoginEntity(
-        token: jsonResponse['token'],
-        id: jsonResponse['id'],
-      );
-    } else {
-      throw Exception('Failed to login');
-    }
-  }*/
 }

@@ -41,7 +41,15 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               Navigator.of(context).pushNamed(MainAppRouter.account);
             },
-            buttonText: "Signup",
+            buttonText: "Acc",
+          ),
+
+          transparentButton(
+            context: context,
+            onTap: () {
+              Navigator.of(context).pushNamed(MainAppRouter.message);
+            },
+            buttonText: "Message",
           )
         ],
       ),

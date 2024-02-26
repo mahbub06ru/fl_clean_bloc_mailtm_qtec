@@ -3,9 +3,6 @@ import 'dart:convert';
 
 import '../../domain/entities/domain.dart';
 
-List<DomainModel> domainListFromRemoteJson(String str) =>
-    List<DomainModel>.from(
-        json.decode(str)['hydra:member'].map((x) => DomainModel.fromJson(x)));
 
 class DomainModel extends DomainEntity {
   const DomainModel({

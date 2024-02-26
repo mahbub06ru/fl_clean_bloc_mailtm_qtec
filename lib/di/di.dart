@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 
 import 'common.dart';
 import 'domain.dart';
+import 'message.dart';
 final sl = GetIt.instance;
 
 // Main Initialization
@@ -13,6 +14,7 @@ Future<void> init() async {
   registerDomainFeature();
   registerLoginFeature();
   registerAccountFeature();
+  registerMessageFeature();
   // Register common dependencies
   registerCommonDependencies();
 }
