@@ -19,6 +19,10 @@ dependencies:
   retrofit: ^4.1.0
   dartz: ^0.10.1
   http: ^1.2.0
+  internet_connection_checker: ^1.0.0+1
+  flutter_phoenix: ^1.1.1
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
