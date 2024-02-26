@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/router/app_router.dart';
 import '../../../../config/common/app.dart';
 import '../../../../config/common/app_dimensions.dart';
+import '../../../../core/constants/assets.dart';
 import '../bloc/remote/login/login_bloc.dart';
 
 
@@ -15,9 +16,9 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   void _nextScreen() async {
-    // Navigator.of(context).pushReplacementNamed(MainAppRouter.login);
-    await Future.delayed(const Duration(seconds: 1));
-    final userState = context.read<LoginBloc>().state;
+    await Future.delayed(const Duration(seconds: 3));
+    Navigator.of(context).pushReplacementNamed(MainAppRouter.domain);
+    /*final userState = context.read<LoginBloc>().state;
     print('userState');
     print(userState);
 
@@ -25,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.of(context).pushReplacementNamed(MainAppRouter.home);
     } else {
       Navigator.of(context).pushReplacementNamed(MainAppRouter.login);
-    }
+    }*/
   }
   @override
   void initState() {
@@ -39,21 +40,8 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     App.init(context);
     return Scaffold(
-      body: Stack(
-        children: [
-          // SvgPicture.asset(
-          //   AppAssets.Splash,
-          //   fit: BoxFit.fill,
-          // ),
-          Positioned(
-            bottom: AppDimensions.normalize(200),
-            left: AppDimensions.normalize(70),
-            child: const CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          ),
-
-        ],
+      body: Center(
+          child: Image.asset(AppAssets.splash,)
       ),
     );
   }

@@ -24,7 +24,7 @@ class LoginBloc extends Bloc<UserEvent, UserState> {
     this._getCachedUserUseCase,
   ) : super(UserInitial()) {
     on<SignInUser>(_onSignIn);
-    on<CheckUser>(_onCheckUser);
+    on<GetUser>(_onCheckUser);
   }
 
   void _onSignIn(SignInUser event, Emitter<UserState> emit) async {
@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  void _onCheckUser(CheckUser event, Emitter<UserState> emit) async {
+  void _onCheckUser(GetUser event, Emitter<UserState> emit) async {
     try {
       emit(UserLoading());
       final result = await _getCachedUserUseCase(NoParams());

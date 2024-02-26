@@ -9,4 +9,4 @@ class SignInUser extends UserEvent {
 }
 
 
-class CheckUser extends UserEvent {}
+class GetUser extends UserEvent {}

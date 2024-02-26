@@ -8,4 +8,4 @@ class CreateAccount extends AccountEvent {
   CreateAccount(this.params);
 }
 
-class CheckAccount extends AccountEvent {}
+class GetAccount extends AccountEvent {}

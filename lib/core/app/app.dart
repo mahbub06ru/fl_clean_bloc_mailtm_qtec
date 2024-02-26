@@ -20,18 +20,16 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => di.sl<LoginBloc>()..add(CheckUser()),
+          create: (context) => di.sl<LoginBloc>()..add(GetUser()),
         ),
         BlocProvider(
-          create: (context) => di.sl<AccountBloc>()..add(CheckAccount()),
+          create: (context) => di.sl<AccountBloc>()..add(GetAccount()),
         ),
         BlocProvider(
-          create: (context) =>
-          di.sl<DomainBloc>()..add(const GetDomains()),
+          create: (context) => di.sl<DomainBloc>()..add(const GetDomains()),
         ),
         BlocProvider(
-          create: (context) =>
-          di.sl<MessageBloc>()..add(const GetMessages()),
+          create: (context) => di.sl<MessageBloc>()..add(const GetMessages()),
         ),
       ],
       child: MaterialApp(

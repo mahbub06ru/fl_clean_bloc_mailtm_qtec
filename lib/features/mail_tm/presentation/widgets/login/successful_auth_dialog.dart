@@ -40,10 +40,10 @@ Future<void> showSuccessfulAuthDialog(BuildContext context, String text) async {
                             return  GestureDetector(
                               onTap: () {
                                 Navigator.of(context)
-                                    .pushNamed(MainAppRouter.home);
+                                    .pushNamed(MainAppRouter.message);
                               },
                               child: Text(
-                                "Go to Home",
+                                "View Message",
                                 style: AppText.b1b,
                               ),
                             );

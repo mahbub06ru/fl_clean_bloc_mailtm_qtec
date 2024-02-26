@@ -27,7 +27,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     this._getCachedUseCase,
   ) : super(AccountInitial()) {
     on<CreateAccount>(_onCreate);
-    on<CheckAccount>(_onCheckAccount);
+    on<GetAccount>(_onCheckAccount);
   }
 
   void _onCreate(CreateAccount event, Emitter<AccountState> emit) async {
@@ -43,7 +43,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
-  void _onCheckAccount(CheckAccount event, Emitter<AccountState> emit) async {
+  void _onCheckAccount(GetAccount event, Emitter<AccountState> emit) async {
     try {
       emit(AccountLoading());
       final result = await _getCachedUseCase(NoParams());
