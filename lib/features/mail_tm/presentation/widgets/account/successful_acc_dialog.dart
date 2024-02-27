@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_mail_tm_qtec/core/router/app_router.dart';
 import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/bloc/remote/account/account_bloc.dart';
+import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/pages/login.dart';
 
 import '../../../../../config/common/app_dimensions.dart';
 import '../../../../../config/common/app_typography.dart';
@@ -10,7 +11,7 @@ import '../../../../../config/routes/routes.dart';
 import '../../bloc/remote/login/login_bloc.dart';
 
 
-Future<void> showSuccessfulAccDialog(BuildContext context, String text) async {
+Future<void> showSuccessfulAccDialog(BuildContext context, String text,String domain) async {
   return showDialog(
     context: context,
     barrierDismissible: true,
@@ -42,6 +43,12 @@ Future<void> showSuccessfulAccDialog(BuildContext context, String text) async {
                               onTap: () {
                                 // Navigator.of(context)
                                 //     .pushNamed(MainAppRouter.home);
+                                Navigator.of(context).pop();
+                                /* Navigator.of(context)
+                                    .pushNamed(MainAppRouter.message);*/
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>  LoginScreen(domain),
+                                ));
                               },
                               child: Text(
                                 "Go to ",
@@ -49,8 +56,13 @@ Future<void> showSuccessfulAccDialog(BuildContext context, String text) async {
                               ),
                             );
                           } else {
-                            return const Text(
-                              "Ok",
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop(); // Close the dialog
+                              },
+                              child: const Text(
+                                "Ok",
+                              ),
                             );
                           }
                         }),

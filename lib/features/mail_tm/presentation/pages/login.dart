@@ -4,21 +4,27 @@ import 'package:flutter_clean_mail_tm_qtec/core/router/app_router.dart';
 
 import '../../../../config/common/app_dimensions.dart';
 import '../../../../config/common/app_typography.dart';
+import '../../../../config/common/components/custom_container.dart';
+import '../../../../config/common/components/custom_password_textfield.dart';
 import '../../../../config/common/space.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/strings.dart';
 import '../../../../core/errors/failures.dart';
 import '../../domain/usecases/login_use_case.dart';
+import '../bloc/remote/account/account_bloc.dart';
 import '../bloc/remote/login/login_bloc.dart';
 import '../widgets/login/auth_error_dialog.dart';
 import '../widgets/login/credential_failure_dialog.dart';
-import '../widgets/login/custom_textfield.dart';
+import '../../../../config/common/components/custom_textfield.dart';
 import '../widgets/login/successful_auth_dialog.dart';
-import '../widgets/login/transparent_button.dart';
+import '../../../../config/common/components/transparent_button.dart';
+import 'account.dart';
 
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+   final String domain;
+  LoginScreen(this.domain, {super.key});
+
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -48,33 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Divider(height: 1,),
-              Container(
-                width: double.infinity,
-                height: 50.0,
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
-                  ),
-                ),
-                child: const Center(
-                  child:  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 8.0),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              _buildBody()
+              const CustomContainer(text: login,),
+              Space.yf(3),
+              _buildBody(widget.domain)
 
             ],
           ),
@@ -84,22 +69,28 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
   }
-  Widget _buildBody(){
+  Widget _buildBody(domain){
     return Padding(
       padding: Space.all(1, 1.3),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Space.y!,
-          buildTextFormField(_emailController, "Email Address"),
+          Row(
+            children: [
+              Expanded(child: buildTextFormField(_emailController, "Email")),
+              Expanded(child: Text('@$domain',style: const TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold
+              ),),),
+            ],
+          ),
           Space.yf(1.5),
-          buildTextFormField(_passwordController, "Password",
-              isObscure: true),
-          Space.yf(1.7),
+          PasswordFormField(controller: _passwordController,labelText: 'Password',),
+          Space.y2!,
           BlocConsumer<LoginBloc, UserState>(
             listener: (context, state) {
               if (state is UserLogged) {
-                showSuccessfulAuthDialog(context, "logged in");
+                showSuccessfulAuthDialog(context, "Logged In",_emailController.text,domain);
               } else if (state is UserLoggedFail) {
                 if (state.failure is CredentialFailure) {
                   showCredentialErrorDialog(context);
@@ -115,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     context.read<LoginBloc>().add(
                       SignInUser(
                         SignInParams(
-                          address: _emailController.text,
+                          address: '${_emailController.text}@'+domain,
                           password: _passwordController.text,
                         ),
                       ),
@@ -144,20 +135,24 @@ class _LoginScreenState extends State<LoginScreen> {
 
           ),
           Space.yf(1.5),
-          Center(
-            child: Text(
-              "Don't have an Account?",
-              style: AppText.b1b,
-            ),
+          Row(
+            children: [
+              const Text(dontHaveAcc),
+              const SizedBox(width: 10,),
+              InkWell(
+
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>  AccountScreen(domain.domain),
+                  ));
+                },
+                child: const Text(create,style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.bold
+                ),),
+              ),
+            ],
           ),
-          Space.y1!,
-          transparentButton(
-            context: context,
-            onTap: () {
-              Navigator.of(context).pushNamed(MainAppRouter.account);
-            },
-            buttonText: "Create",
-          )
+
         ],
       ),
     );

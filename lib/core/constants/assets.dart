@@ -7,4 +7,6 @@ sealed class AppAssets {
   static const String splash = "assets/images/qtec.png";
   static const String icon = "assets/images/qtec.png";
 
+  //font
+  static const String font = "assets/fonts/Lato-Regular";
 }

@@ -27,11 +27,6 @@ class MessageRemoteDataSourceImpl implements MessageRemoteDataSource {
     print(response.statusCode );
 
     if (response.statusCode == 200) {
-      // final Map<String, dynamic> jsonMap = json.decode(response.body);
-      // final List<dynamic> messagesJson = jsonMap['hydra:member'];
-      // print(messagesJson);
-      // return messagesJson.map((messageJson) => MessageModel.fromJson(messageJson)).toList();
-
       final List<dynamic> domainsJson = json.decode(response.body)['hydra:member'];
       print(domainsJson);
       return domainsJson.map((domainJson) => MessageModel.fromJson(domainJson)).toList();

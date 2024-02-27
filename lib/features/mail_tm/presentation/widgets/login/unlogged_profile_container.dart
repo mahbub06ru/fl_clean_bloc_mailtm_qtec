@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/widgets/login/transparent_button.dart';
+import 'package:flutter_clean_mail_tm_qtec/config/common/components/transparent_button.dart';
 
 import '../../../../../config/common/app_typography.dart';
 import '../../../../../config/common/space.dart';

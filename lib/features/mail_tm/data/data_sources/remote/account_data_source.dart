@@ -26,12 +26,14 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource {
           'Content-Type': 'application/json',
         },
         body: json.encode({
-          // 'username': params.username,
-          'address': 'mahbub06ru4@yogirt.com',
-          // 'password': params.password,
-          'password': '123456M@ahbub',
+          'address': params.address,
+          // 'address': 'mahbub06ru4@yogirt.com',
+          'password': params.password,
+          // 'password': '123456M@ahbub',
         }));
-    print('statusCode');
+    print('statusCodeA');
+    print(params.address);
+    print(params.password);
     print(response.statusCode);
     if (response.statusCode == 200) {
       return accountModelFromJson(response.body);

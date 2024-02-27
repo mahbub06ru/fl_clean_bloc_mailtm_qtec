@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_mail_tm_qtec/core/router/app_router.dart';
 
 import '../bloc/remote/login/login_bloc.dart';
-import '../widgets/login/transparent_button.dart';
+import '../../../../config/common/components/transparent_button.dart';
 import '../widgets/login/unlogged_profile_container.dart';
 import '../widgets/login/user_logged_profile_container.dart';
 

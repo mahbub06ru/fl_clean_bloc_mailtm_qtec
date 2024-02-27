@@ -21,13 +21,13 @@ sealed class MainAppRouter {
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashPage());
       case domain:
-        return MaterialPageRoute(builder: (_) => const DomainListPage());
+        return MaterialPageRoute(builder: (_) =>  DomainListPage());
       case account:
-        return MaterialPageRoute(builder: (_) => const AccountScreen());
+        return MaterialPageRoute(builder: (_) =>  AccountScreen(''));
       case login:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(builder: (_) =>  LoginScreen(''));
       case message:
-        return MaterialPageRoute(builder: (_) => const MessageListPage());
+        return MaterialPageRoute(builder: (_) =>  MessageListPage('',''));
       case home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       default:

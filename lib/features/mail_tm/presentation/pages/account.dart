@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_mail_tm_qtec/core/router/app_router.dart';
 import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/domain/usecases/account_use_case.dart';
 import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/bloc/remote/account/account_bloc.dart';
+import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/pages/login.dart';
 
 import '../../../../config/common/app_dimensions.dart';
 import '../../../../config/common/app_typography.dart';
+import '../../../../config/common/components/custom_container.dart';
+import '../../../../config/common/components/custom_password_textfield.dart';
 import '../../../../config/common/space.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/strings.dart';
@@ -15,13 +18,14 @@ import '../bloc/remote/login/login_bloc.dart';
 import '../widgets/account/successful_acc_dialog.dart';
 import '../widgets/login/auth_error_dialog.dart';
 import '../widgets/login/credential_failure_dialog.dart';
-import '../widgets/login/custom_textfield.dart';
+import '../../../../config/common/components/custom_textfield.dart';
 import '../widgets/login/successful_auth_dialog.dart';
-import '../widgets/login/transparent_button.dart';
+import '../../../../config/common/components/transparent_button.dart';
 
 
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({super.key});
+  final String domain;
+  AccountScreen(this.domain, {super.key});
 
   @override
   State<AccountScreen> createState() => _AccountScreenState();
@@ -54,31 +58,9 @@ class _AccountScreenState extends State<AccountScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Divider(height: 1,),
-              Container(
-                width: double.infinity,
-                height: 50.0,
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
-                  ),
-                ),
-                child: const Center(
-                  child:  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 8.0),
-                      child: Text(
-                        'Create Email Account',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Space.y!,
-              _buildBody(),
+              const CustomContainer(text: createEmail,),
+              Space.yf(3),
+              _buildBody(widget.domain),
 
             ],
           ),
@@ -88,31 +70,35 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  Widget _buildBody(){
+  Widget _buildBody(domain){
     return Padding(
       padding: Space.all(1, 1.3),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildTextFormField(_emailController, "Email Address"),
-          Space.yf(1.5),
-          Text(
-            "Password*",
-            style: AppText.b1b,
+          Row(
+            children: [
+              Expanded(child: buildTextFormField(_emailController, "Email")),
+              Expanded(child: Text('@$domain',style: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.bold
+              ),),),
+            ],
           ),
-          Space.y!,
-          buildTextFormField(_passwordController, "Password",
-              isObscure: true),
+          Space.yf(1.5),
+          PasswordFormField(controller: _passwordController,labelText: 'Password',),
           Space.y2!,
           BlocConsumer<AccountBloc, AccountState>(
             listener: (context, state) {
               if (state is AccountLoaded) {
-                showSuccessfulAccDialog(context, "Created");
+                var address = state.user.address;
+                showSuccessfulAccDialog(context, "Created",widget.domain);
               } else if (state is AccountLoadedFail) {
                 if (state.failure is CredentialFailure) {
+                  print('state1');
                   showCredentialErrorDialog(context);
                 } else {
-                  showAuthErrorDialog(context);
+                  print('state2');
+                  // showAuthErrorDialog(context);
                 }
               }
             },
@@ -123,7 +109,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     context.read<AccountBloc>().add(
                       CreateAccount(
                         JsonParams(
-                          address: _emailController.text,
+                          address: '${_emailController.text}@'+domain,
                           password: _passwordController.text,
                         ),
                       ),
@@ -151,20 +137,23 @@ class _AccountScreenState extends State<AccountScreen> {
             },
           ),
           Space.yf(1.5),
-          Center(
-            child: Text(
-              "Already have an Account?",
-              style: AppText.b1b,
-            ),
+          Row(
+            children: [
+              const Text(alreadyHave),
+              const SizedBox(width: 10,),
+              InkWell(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>  LoginScreen(domain),
+                  ));
+                },
+                child: const Text(login,style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.bold
+                ),),
+              ),
+            ],
           ),
-          Space.y1!,
-          transparentButton(
-            context: context,
-            onTap: () {
-              Navigator.of(context).pushNamed(MainAppRouter.login);
-            },
-            buttonText: "Login",
-          )
+
         ],
       ),
     );

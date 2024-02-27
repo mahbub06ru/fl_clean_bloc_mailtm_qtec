@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+
         title: appTitle,
         onGenerateRoute: MainAppRouter.onGenerateRoute,
         theme: ThemeData.light().copyWith(

@@ -8,9 +8,9 @@ class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case domainList:
-        return MaterialPageRoute(builder: (_) => const DomainListPage());
+        return MaterialPageRoute(builder: (_) =>  DomainListPage());
       default:
-        return MaterialPageRoute(builder: (_) => const DomainListPage()); // Replace with your default screen
+        return MaterialPageRoute(builder: (_) =>  DomainListPage()); // Replace with your default screen
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_mail_tm_qtec/core/router/app_router.dart';
+import 'package:flutter_clean_mail_tm_qtec/features/mail_tm/presentation/pages/messages.dart';
 
 import '../../../../../config/common/app_dimensions.dart';
 import '../../../../../config/common/app_typography.dart';
@@ -9,7 +10,7 @@ import '../../../../../config/routes/routes.dart';
 import '../../bloc/remote/login/login_bloc.dart';
 
 
-Future<void> showSuccessfulAuthDialog(BuildContext context, String text) async {
+Future<void> showSuccessfulAuthDialog(BuildContext context, String text,String mail,String domain) async {
   return showDialog(
     context: context,
     barrierDismissible: true,
@@ -39,8 +40,12 @@ Future<void> showSuccessfulAuthDialog(BuildContext context, String text) async {
                           if (state is UserLogged) {
                             return  GestureDetector(
                               onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed(MainAppRouter.message);
+                                Navigator.of(context).pop();
+                                /* Navigator.of(context)
+                                    .pushNamed(MainAppRouter.message);*/
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>  MessageListPage(mail,domain),
+                                ));
                               },
                               child: Text(
                                 "View Message",
@@ -48,8 +53,13 @@ Future<void> showSuccessfulAuthDialog(BuildContext context, String text) async {
                               ),
                             );
                           } else {
-                            return const Text(
-                              "Ok",
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop(); // Close the dialog
+                              },
+                              child: const Text(
+                                "Ok",
+                              ),
                             );
                           }
                         }),
